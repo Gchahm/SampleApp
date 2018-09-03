@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
   #StaticPages routes
   root 'static_pages#home'
   get  '/help',    to: 'static_pages#help', as: 'helf'
@@ -15,5 +19,5 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   #account Activation
   resources :account_activations, only: [:edit]
-
+  resources :password_resets,     only: [:new, :create, :edit, :update]
 end
