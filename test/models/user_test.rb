@@ -77,4 +77,13 @@ class UserTest < ActiveSupport::TestCase
     assert_not_nil @user.remember_digest
   end
 
+  test "associated microposts should be destroyed" do
+    @user.save
+    @user.microposts.create!(content: "Lorem ipsum")
+    @user.microposts.create!(content: "Lorem ipsum 2")
+    assert_difference 'Micropost.count', -2 do
+      @user.destroy
+    end
+  end
+
 end
